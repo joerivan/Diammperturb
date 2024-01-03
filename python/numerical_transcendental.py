@@ -16,7 +16,7 @@ def main():
     n = 1
 
     # transcendental solution
-    I = 100  # number of iterations of fixed point equation
+    I = 20  # number of iterations of fixed point equation
     psi, E = transcendental(x, a, V0, I, n)
 
     # plotting
@@ -30,7 +30,7 @@ def main():
     print("Energy (Ht): \n", E)
 
 
-def transcendental(x, a=1, V0=1, I=10, n=1):
+def transcendental(x, a=1, V0=1, I=20, n=1):
     """
     Calculate the wavefunction for transcendental technique up to Nth
     iterations of phi
