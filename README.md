@@ -1,4 +1,4 @@
-![diagram image](diagram_image.png)
+![diagram image](diagram_image.svg)
 
 # Diammperturb
 
