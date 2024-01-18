@@ -12,7 +12,7 @@ def main():
     a = 1
     V0 = 1
 
-    npts = 501
+    npts = 10001
     x = np.linspace(0, a, npts)
 
     # selecting ground/excited state
