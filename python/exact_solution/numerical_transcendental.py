@@ -1,8 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
 def main():
+
+    # settings folder hwere the file runs
+    folder = os.path.dirname(__file__)
 
     # system
     a = 1
@@ -16,37 +20,46 @@ def main():
     n = 1
 
     # transcendental solution
-    I = 20  # number of iterations of fixed point equation
-    psi, E = transcendental(x, a, V0, I, n)
+    psi, E = transcendental(x, a, V0, n)
 
     # plotting
     plt.figure(1, dpi=200)
-    plt.plot(x, psi, label="trascendental", color="#785EF0")
+    plt.plot(x, psi, color="#785EF0")
     plt.xlabel('$x/a$ [-]')
-    plt.ylabel('$\psi$ [-]')
+    plt.ylabel(r'$\psi$ [-]')
     plt.grid(linestyle='--')
 
     # printing energies
-    print("Energy (Ht): \n", E)
+    print("Energy (Ht):\n", E)
+
+    # saving plot
+    plt.savefig(os.path.join(folder, 'transecendental_wavefunction.svg'))
 
 
-def transcendental(x, a=1, V0=1, I=20, n=1):
+def transcendental(x, a=1, V0=1, n=1, tol=1e-20):
     """
-    Calculate the wavefunction for transcendental technique up to Nth
-    iterations of phi
+    Calculate the wavefunction for transcendental technique
     """
     # find the wave number
     if n == 0:
         raise Exception("Invalid state selected, in the ground state n=1")
     elif n % 2 == 1:
         # when wavefunction is effected by potential
-        # iteratively find phase shift phi
+        # find phase shift phi
+
+        i = 0
+        diff = 1
         phi = [0]
-        for i in range(I):
+
+        while diff > tol:
             phi.append(np.arctan(V0/(np.pi+2*phi[i]))+(n-1)/2*np.pi)
+            i += 1
+            diff = abs(phi[i-1] - phi[i])
         phi = np.array(phi)
 
         k = np.pi + 2*phi[-1]
+        print("Phase shift:\n", phi[-1])
+
     elif n % 2 == 0:
         # when wavefunction is not effected by potential
         k = n*np.pi/a
@@ -54,7 +67,7 @@ def transcendental(x, a=1, V0=1, I=20, n=1):
     # find wavefunction values and normalise
     f = [transcendental_wf(xx, k, a) for xx in x]
     f = np.array(f)
-    psi = abs(normalise(f, x))
+    psi = normalise(f, x)
 
     # determine energy
     E = k**2/2
