@@ -1,3 +1,7 @@
+## Diagrammatic_Rayleigh_Schrödinger_perturbation_theory.ipynb
+
+The jupyter notebooks file of the programmatic implementation of diagrammatic Rayleigh Schrödinger perturbation theory
+
 ## exact_solution
 	
 - [numerical_transcendental.py](exact_solution/numerical_transcendental.py) numerical evaluation of the 'transcendental' or most exact solution, this script produces [transecendental_wavefunction.svg](exact_solution/transecendental_wavefunction.svg)
